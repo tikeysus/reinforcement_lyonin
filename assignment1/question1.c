@@ -9,9 +9,9 @@
 
 int optimal_index_finder(float* probabilities){
 	float max = 0; 
-	int max_index;
+	int max_index = 0;
 	for (int i = 0; i < 10; i++){
-		if (probabilities[i] >= max){
+		if (probabilities[i] > max){
 			max = probabilities[i]; 
 			max_index = i; 
 		}
@@ -69,8 +69,6 @@ void question1(){
 	probabilities = (float*) calloc(10, 1); 
 	array_maker(probabilities); 
 	individual_round(probabilities); 
-
-
 	free(probabilities);
 }
 
