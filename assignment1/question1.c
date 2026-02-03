@@ -5,14 +5,12 @@
 #include <stdlib.h> 
 #include <math.h>
 
-//I got a nan error once, gotta see what's up with that 	
-
-int optimal_index_finder(float* probabilities){
+int optimal_index_finder(float* array){
 	float max = 0; 
 	int max_index = 0;
 	for (int i = 0; i < 10; i++){
-		if (probabilities[i] > max){
-			max = probabilities[i]; 
+		if (array[i] > max){
+			max = array[i]; 
 			max_index = i; 
 		}
 	}
@@ -21,22 +19,33 @@ int optimal_index_finder(float* probabilities){
 }
 
 int bernoulli(float p){
-	float random = (float)rand() / RAND_MAX; 
-	//printf("this is the random num - %.1f, this is the p being compared to - %.1f\n", random, p); 
-	return random < p; 
+	float random = (float)rand() / RAND_MAX; //make a random number. 
+	return random < p; //with probability p, this equality will either be true or false. 
 }
 
 void individual_round(float* probabilities){
+	int optimal_action_index = optimal_index_finder(probabilities); 
+	int optimality_count = 0; //tracking number of times that optimal action was taken
 	int c = 2; //coefficient, might change value later depending on the demands of the question
-	int* n_t = (int*) calloc(10, 1); //number of times each action has been chosen 
-	float* q_t = (float*) calloc(10,1); 
-	float* a_t = (float*) calloc(10,1); 
+	int* n_t = (int*) calloc(10, sizeof(int)); //number of times each action has been chosen 
+	float* q_t = (float*) calloc(10, sizeof(float));  
+	float* a_t = (float*) calloc(10, sizeof(float)); 
+	/*
+	each of these are size 10 arrays, and they each represent q (value), 
+	n (number of times action has been taken), and a (the ucb score for that arm). 
+	*\
 
+
+	/*
+	In the first ten iterations, each arm is assumed to be maximizing, therefore, we try all the 10 arms 
+	in our initial exploration. 
+	*/
 	for (int i = 0; i < 10; i++){
-		if (bernoulli(probabilities[i]) == 0){
+		int reward = bernoulli(probabilities[i]); 
+		if (reward == 0){
 			q_t[i] = 0; 
 		}
-		else if (bernoulli(probabilities[i]) == 1){
+		else if (reward == 1){
 			q_t[i] = 1; 
 		}
 		n_t[i]++;  
@@ -47,12 +56,19 @@ void individual_round(float* probabilities){
 		int action = optimal_index_finder(a_t); 
 		n_t[action]++; 
 		int reward = bernoulli(probabilities[action]); 
-		q_t[action] += 1/i*(reward - q_t[action]); 
+		q_t[action] += (1/i)*(reward - q_t[action]); 
+
+		if (action == optimal_action_index){
+			optimality_count++; 
+		}
 	}
 
 	for (int i = 0; i < 10; i++){
 		printf("Action %d was tried %d times\n", i, n_t[i]); 
 	}
+
+	printf("The optimality count is - %d\n", optimality_count); 
+
 }
 
 
@@ -61,6 +77,7 @@ void array_maker(float* probablities){
 
 	for (int i = 0; i < 10; i++){
 		probablities[i] = (float) (rand() % 10) / 10.0f; 
+		printf("%f\n", probablities[i]); 
 	}
 }
 
