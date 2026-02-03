@@ -9,9 +9,9 @@
 
 int optimal_index_finder(float* probabilities){
 	float max = 0; 
-	int max_index; 
+	int max_index;
 	for (int i = 0; i < 10; i++){
-		if (probabilities[i] > max){
+		if (probabilities[i] >= max){
 			max = probabilities[i]; 
 			max_index = i; 
 		}
