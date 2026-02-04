@@ -4,6 +4,7 @@
 #include <time.h> 
 #include <stdlib.h> 
 #include <math.h>
+#include <unistd.h>
 
 int optimal_index_finder(float* array){
 	float max = 0; 
@@ -63,12 +64,8 @@ void individual_round(float* probabilities){
 		}
 	}
 
-	for (int i = 0; i < 10; i++){
-		printf("Action %d was tried %d times\n", i, n_t[i]); 
-	}
-
 	printf("The optimality count is - %d\n", optimality_count); 
-
+	free(n_t); free(a_t); free(q_t); 
 }
 
 
@@ -77,16 +74,18 @@ void array_maker(float* probablities){
 
 	for (int i = 0; i < 10; i++){
 		probablities[i] = (float) (rand() % 10) / 10.0f; 
-		printf("%f\n", probablities[i]); 
 	}
 }
 
 void question1(){
-	float* probabilities; 
-	probabilities = (float*) calloc(10, 1); 
-	array_maker(probabilities); 
-	individual_round(probabilities); 
-	free(probabilities);
+	for (int i = 0; i < 99; i++){
+		usleep(100000);
+		float* probabilities; 
+		probabilities = (float*) calloc(10, sizeof(float)); 
+		array_maker(probabilities); 
+		individual_round(probabilities); 
+		free(probabilities);
+	}
 }
 
 int main(){
