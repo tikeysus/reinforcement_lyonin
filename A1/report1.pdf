@@ -1,0 +1,1 @@
+UCB allows for a simple solution to finding the middle ground between exploration and exploitation. When using UCB, we consider actions that are potentially optimal, taking into account estimates and errors in those estimates.  
