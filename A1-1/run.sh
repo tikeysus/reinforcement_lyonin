@@ -2,7 +2,7 @@
 set -e  # stop on first error
 
 BUILD_DIR=build
-EXECUTABLE=A1
+EXECUTABLE=A1_1
 
 # Configure
 cmake -S . -B "$BUILD_DIR"
