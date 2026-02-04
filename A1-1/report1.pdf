@@ -1,3 +1,0 @@
-UCB allows for a simple solution to finding the middle ground between exploration and exploitation. When using UCB, we consider actions that are potentially optimal, taking into account estimates and errors in those estimates. 
-
-In agent.cpp, once we find an unexplored arm, we explore it because UCB considers unexplored arms as maximizing actions. With this algorithm, the action converges to the optimal arm over time, with there being slight variance across environments, but mostly an average reward of around 0.9 in 5000 iterations of one environment or "world" as it is referred to in the program.  
