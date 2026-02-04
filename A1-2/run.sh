@@ -14,4 +14,4 @@ cmake --build "$BUILD_DIR"
 "./$BUILD_DIR/$EXECUTABLE"
 
 #Run plotting
-python3 plot_results.py 
+#python3 plot_results.py 
