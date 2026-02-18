@@ -4,8 +4,8 @@ project(A2_3)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(A2_3 main.cpp
-        GridWorld.cpp
-        GridWorld.h
+        Gridworld.cpp
+        Gridworld.h
         ValueIteration.cpp
         ValueIteration.h
         via.cpp
