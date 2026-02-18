@@ -1,5 +1,5 @@
 #include "via.h"
-#include "GridWorld.h"
+#include "Gridworld.h"
 #include "ValueIteration.h"
 #include <iostream>
 

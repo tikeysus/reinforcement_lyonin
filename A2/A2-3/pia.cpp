@@ -1,5 +1,5 @@
 #include "pia.h"
-#include "GridWorld.h"
+#include "Gridworld.h"
 #include "PolicyIteration.h"
 #include <iostream>
 
